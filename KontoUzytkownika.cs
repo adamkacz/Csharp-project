@@ -7,24 +7,28 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
-    class KontoUzytkownika : Konto
+    class KontoUzytkownika : Konto, INaPozniej
     {
         DateTime dataUrodzenia;
         List<Usluga> listaUslug;
+        List<Film> listaNaPozniej;
 
         public DateTime DataUrodzenia { get => dataUrodzenia; set => dataUrodzenia = value; }
         public List<Usluga> ListaUslug { get => listaUslug; set => listaUslug = value; }
+        internal List<Film> ListaNaPozniej { get => listaNaPozniej; set => listaNaPozniej = value; }
 
         public KontoUzytkownika() : base()
         {
             dataUrodzenia = DateTime.Now;
             ListaUslug = new List<Usluga>();
+            ListaNaPozniej = new List<Film>();
         }
 
         public KontoUzytkownika(string login, string haslo, string imie, string nazwisko, string dataUrodzenia, string email) : base(login, haslo, imie, nazwisko, email)
         {
             DateTime.TryParseExact(dataUrodzenia, new[] { "yyyy-MM-dd", "yyyy/MM/dd", "MM/dd/yy", "dd-MM-yy" }, null, System.Globalization.DateTimeStyles.None, out this.dataUrodzenia);
             ListaUslug = new List<Usluga>();
+            ListaNaPozniej = new List<Film>();
         }
 
         //public int Wiek()
@@ -46,21 +50,33 @@ namespace Projekt
         {
             return $"{base.ToString()}, Data urodzenia: {dataUrodzenia.ToShortDateString()}";
         }
+
+        public void DodajDoObejrzenia(Film f)
+        {
+            NaPozniej u = new NaPozniej();
+            if (listaUslug.Contains(u))
+            {
+                NaPozniej.DodajDoObejrzenia(f, ListaNaPozniej);
+            }
+            else
+            {
+                throw new BrakUprawnienException("Błąd. Nie masz uprawnień.");
+            }
+        }
+
+        public void UsunZListyDoObejrzenia(Film f)
+        {
+            NaPozniej u = new NaPozniej();
+            if (listaUslug.Contains(u))
+            {
+                NaPozniej.Usun(f,ListaNaPozniej);
+            }
+            else
+            {
+                throw new BrakUprawnienException("Błąd. Nie masz uprawnień.");
+            }
+        }
     }
 
-    //-------------------------------------------------
-    //DO LISTY KONT 
-    //foreach(Uzytkownik u in Listakont)
-    //{
-    //    if (haslo == u.Haslo || login == u.Login)
-    //        {
-    //            return true;
-    //        }
-    //    else
-    //        {
-    //            return false;
-    //        }
 
-    //}
-   
 }
