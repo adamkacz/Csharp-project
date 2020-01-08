@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Projekt
 {
-    public class WrongAgeException : Exception
-    {
-
-    }
-
+    
     enum Gatunek { komedia, horror, romantyczny, dokumentalny, fantasy, thriller }
-    class Film
+    class Film : IComparable<Film>
     {
         string tytul;
         Gatunek gatunek;
@@ -44,7 +39,11 @@ namespace Projekt
             return $"FILM: '{tytul}', Gatunek: {gatunek}, Ograniczenie wiekowe: {ograniczenieWiekowe}";
         }
 
+
+        public int CompareTo(Film f)
+        {
+            return Tytul.CompareTo(f.Tytul);
+        }
     }
-
-
+    
 }
