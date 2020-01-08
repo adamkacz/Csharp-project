@@ -29,15 +29,18 @@ namespace Projekt
             Nazwisko = "";
         }
 
-        public Konto(string login, string haslo, string email, string imie, string nazwisko)
+        public Konto(string login, string haslo, string imie, string nazwisko, string email)
         {
-            Login = login;
-
+            try { setLogin(login); }
+            catch (LoginException f)
+            {
+                Console.WriteLine( f.Message);
+            }
 
             try { setHaslo(haslo); }
-            catch (Exception e)
+            catch (HasloException e)
             {
-                Console.WriteLine("Za krótkie hasło. "+e.Message);
+                Console.WriteLine(e.Message);
             }
             Email = email;
             Imie = imie;
@@ -48,14 +51,23 @@ namespace Projekt
         {
             if(haslo.Length<6)
             { 
-              throw new Exception();
+              throw new HasloException("Za krótkie hasło.");
             }
             else { Haslo = haslo; }
         }
-      
+
+        public void setLogin(string login)
+        {
+            if ((login.Length<3) && (login.Length>19))
+            {
+                throw new LoginException("Login nie może być krótszy niż 3 znaki ani dłuższy niż 19. ");
+            }
+            else { Login = login; }
+        }
+
         public override string ToString()
         {
-            return $"UŻYTKOWNIK: {imie} {nazwisko}, {email}";
+            return $"UŻYTKOWNIK: {login}, {imie} {nazwisko}, {email}";
         }
     }
 }
