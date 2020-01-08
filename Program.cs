@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
-    interface IDodawanieRecenzji
+    class Program
     {
-        void DodajRecenzje(Recenzja rec, Film f);
-        void UsunRecenzje(Recenzja rec, Film f);
+        static void Main(string[] args)
+        {
+        
+        }
     }
 }

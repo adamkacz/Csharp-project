@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Projekt
 {
-    class Recenzja : IComparable<Recenzja>, IEquatable<Recenzja>
+    [Serializable]
+    [DataContract]
+    class Recenzja : IComparable<Recenzja>, IEquatable<Recenzja>, ICloneable
     {
         string opis;
         KontoUzytkownika uzytkownik;
         DateTime czasDodania;
 
+        [DataMember]
         public string Opis { get => opis; set => opis = value; }
+        [DataMember]
         internal KontoUzytkownika Uzytkownik { get => uzytkownik; set => uzytkownik = value; }
 
         public Recenzja()
@@ -49,5 +56,19 @@ namespace Projekt
             else
                 return false;
         }
+
+        public object Clone()
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            BinaryFormatter bffinal = new BinaryFormatter();
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bf.Serialize(ms, this);
+                ms.Position = 0;
+                return bffinal.Deserialize(ms);
+            }
+        }
+
+
     }
 }

@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Projekt
 {
+    [DataContract]
     abstract class Usluga : IEquatable<Usluga>
     {
         double koszt;
         string nazwa;
 
+        [DataMember]
         public double Koszt { get => koszt; set => koszt = value; }
+        [DataMember]
         public string Nazwa { get => nazwa; set => nazwa = value; }
 
         public Usluga()
@@ -30,6 +34,6 @@ namespace Projekt
         {
             return Nazwa.Equals(u.Nazwa);
         }
-        
+
     }
 }

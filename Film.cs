@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Projekt
 {
-    
     enum Gatunek { komedia, horror, romantyczny, dokumentalny, fantasy, thriller }
+    [DataContract]
     class Film : IComparable<Film>
     {
         string tytul;
@@ -15,9 +16,13 @@ namespace Projekt
         int ograniczenieWiekowe;
         List<Recenzja> listaRecenzji;
 
+        [DataMember]
         public string Tytul { get => tytul; set => tytul = value; }
+        [DataMember]
         public int OgraniczenieWiekowe { get => ograniczenieWiekowe; set => ograniczenieWiekowe = value; }
+        [DataMember]
         public Gatunek Gatunek { get => gatunek; set => gatunek = value; }
+        [DataMember]
         public List<Recenzja> ListaRecenzji { get => listaRecenzji; set => listaRecenzji = value; }
 
         public Film()
@@ -45,5 +50,5 @@ namespace Projekt
             return Tytul.CompareTo(f.Tytul);
         }
     }
-    
+
 }

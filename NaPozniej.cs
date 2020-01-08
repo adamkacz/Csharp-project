@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Projekt
 {
+    [DataContract]
     class NaPozniej : Usluga
     {
         internal NaPozniej() : base("Na później", 5.5)
