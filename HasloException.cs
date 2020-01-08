@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
-    class HasloException 
+    class HasloException:Exception
     {
+        public HasloException(string msg):base(msg)
+        {
+
+        }
     }
 }
