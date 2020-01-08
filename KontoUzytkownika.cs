@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
-    class KontoUzytkownika : Konto, INaPozniej
+    class KontoUzytkownika : Konto, INaPozniej, IDodawanieRecenzji
     {
         DateTime dataUrodzenia;
         List<Usluga> listaUslug;
@@ -70,6 +70,33 @@ namespace Projekt
             if (listaUslug.Contains(u))
             {
                 NaPozniej.Usun(f,ListaNaPozniej);
+            }
+            else
+            {
+                throw new BrakUprawnienException("Błąd. Nie masz uprawnień.");
+            }
+        }
+
+        public void DodajRecenzje(Recenzja rec, Film f)
+        {
+            DodawanieRecenzji r = new DodawanieRecenzji();
+            if(ListaUslug.Contains(r))
+            {
+                DodawanieRecenzji.DodajRecenzje(rec, f);
+            }
+            else
+            {
+                throw new BrakUprawnienException("Błąd. Nie masz uprawnień.");
+            }
+        }
+
+        public void UsunRecenzje(Recenzja rec, Film f)
+        {
+
+            DodawanieRecenzji r = new DodawanieRecenzji();
+            if (ListaUslug.Contains(r))
+            {
+                DodawanieRecenzji.UsunRecenzje(rec,f);
             }
             else
             {
