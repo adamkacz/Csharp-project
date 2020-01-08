@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
-    abstract class Usluga
+    abstract class Usluga : IEquatable<Usluga>
     {
         double koszt;
         string nazwa;
@@ -24,6 +24,11 @@ namespace Projekt
         {
             Nazwa = nazwa;
             Koszt = koszt;
+        }
+
+        public bool Equals(Usluga u)
+        {
+            return Nazwa.Equals(u.Nazwa);
         }
         
     }
