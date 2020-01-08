@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
-    abstract class Konto
+    class Konto : IEquatable<Konto>
     {
         string login;
         string haslo;
@@ -34,7 +34,7 @@ namespace Projekt
             try { setLogin(login); }
             catch (LoginException f)
             {
-                Console.WriteLine( f.Message);
+                Console.WriteLine(f.Message);
             }
 
             try { setHaslo(haslo); }
@@ -49,16 +49,16 @@ namespace Projekt
 
         public void setHaslo(string haslo)
         {
-            if(haslo.Length<6)
-            { 
-              throw new HasloException("Za krótkie hasło.");
+            if (haslo.Length < 6)
+            {
+                throw new HasloException("Za krótkie hasło.");
             }
             else { Haslo = haslo; }
         }
 
         public void setLogin(string login)
         {
-            if ((login.Length<3) && (login.Length>19))
+            if ((login.Length < 3) && (login.Length > 19))
             {
                 throw new LoginException("Login nie może być krótszy niż 3 znaki ani dłuższy niż 19. ");
             }
@@ -68,6 +68,11 @@ namespace Projekt
         public override string ToString()
         {
             return $"UŻYTKOWNIK: {login}, {imie} {nazwisko}, {email}";
+        }
+
+        public bool Equals(Konto k)
+        {
+            return Login.Equals(k.Login);
         }
     }
 }
