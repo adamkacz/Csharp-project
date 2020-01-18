@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
+    [Serializable]
     [DataContract]
-    class Platforma
+    public class Platforma
     {
         string nazwa;
         List<KontoUzytkownika> listaKont;
@@ -18,9 +19,9 @@ namespace Projekt
         List<Usluga> listaDoWyboru;
 
         [DataMember]
-        internal List<KontoUzytkownika> ListaKont { get => listaKont; set => listaKont = value; }
+        public List<KontoUzytkownika> ListaKont { get => listaKont; set => listaKont = value; }
         [DataMember]
-        internal List<Film> ListaFilmow { get => listaFilmow; set => listaFilmow = value; }
+        public List<Film> ListaFilmow { get => listaFilmow; set => listaFilmow = value; }
         [DataMember]
         public string Nazwa { get => nazwa; set => nazwa = value; }
 
@@ -75,5 +76,7 @@ namespace Projekt
                 return dcs.ReadObject(fs) as Platforma;
             }
         }
-    } 
+
+        
+    }
 }

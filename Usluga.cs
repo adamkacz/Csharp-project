@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
+    [Serializable]
     [DataContract]
-    abstract class Usluga : IEquatable<Usluga>
+    public abstract class Usluga : IEquatable<Usluga>
     {
         double koszt;
         string nazwa;

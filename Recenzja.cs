@@ -11,7 +11,7 @@ namespace Projekt
 {
     [Serializable]
     [DataContract]
-    class Recenzja : IComparable<Recenzja>, IEquatable<Recenzja>, ICloneable
+    public class Recenzja : IComparable<Recenzja>, IEquatable<Recenzja>, ICloneable
     {
         string opis;
         KontoUzytkownika uzytkownik;

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
+    [Serializable]
     [DataContract]
     class NaPozniej : Usluga
     {

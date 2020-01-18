@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
+    [Serializable]
     [DataContract]
-    class KontoUzytkownika : Konto, INaPozniej, IDodawanieRecenzji
+    public class KontoUzytkownika : Konto, INaPozniej, IDodawanieRecenzji
     {
         DateTime dataUrodzenia;
         List<Usluga> listaUslug;
         List<Film> listaNaPozniej;
-        List<Usluga> listaDoWyboru;
+        //List<Usluga> listaDoWyboru;
         static double abonament;
 
         [DataMember]
@@ -21,9 +22,9 @@ namespace Projekt
         [DataMember]
         public List<Usluga> ListaUslug { get => listaUslug; set => listaUslug = value; }
         [DataMember]
-        internal List<Film> ListaNaPozniej { get => listaNaPozniej; set => listaNaPozniej = value; }
-        [DataMember]
-        internal List<Usluga> ListaDoWyboru { get => listaDoWyboru; set => listaDoWyboru = value; }
+        public List<Film> ListaNaPozniej { get => listaNaPozniej; set => listaNaPozniej = value; }
+        //[DataMember]
+        //public List<Usluga> ListaDoWyboru { get => listaDoWyboru; set => listaDoWyboru = value; }
         public static double Abonament { get => abonament; }
 
         static KontoUzytkownika()
@@ -33,24 +34,31 @@ namespace Projekt
 
         public KontoUzytkownika() : base()
         {
-            dataUrodzenia = DateTime.Now;
+            DataUrodzenia = DateTime.Now;
             ListaUslug = new List<Usluga>();
             ListaNaPozniej = new List<Film>();
-            ListaDoWyboru = new List<Usluga>();
+            //ListaDoWyboru = new List<Usluga>();
         }
 
-        public KontoUzytkownika(string login, string haslo, string imie, string nazwisko, string dataUrodzenia, string email) : base(login, haslo, imie, nazwisko, email)
+        public KontoUzytkownika(string login, string haslo, string imie, string nazwisko,
+            DateTime dataUrodzenia, string email) : base(login, haslo, imie, nazwisko, email)
         {
-            DateTime.TryParseExact(dataUrodzenia, new[] { "yyyy-MM-dd", "yyyy/MM/dd", "MM/dd/yy", "dd-MM-yy" }, null, System.Globalization.DateTimeStyles.None, out this.dataUrodzenia);
+            DataUrodzenia = dataUrodzenia;
             ListaUslug = new List<Usluga>();
             ListaNaPozniej = new List<Film>();
-            ListaDoWyboru = new List<Usluga>();
+            //ListaDoWyboru = new List<Usluga>();
         }
 
-        //public int Wiek()
-        //{
-        //    return DateTime.Now.Year - DataUrodzenia.Year;
-        //}
+        public int Wiek()
+        {
+            int kontrol = DateTime.Now.Year - DataUrodzenia.Year;
+            if (DataUrodzenia.AddYears(kontrol) > DateTime.Now)
+            {
+                return kontrol - 1;
+            }
+            else
+                return kontrol;
+        }
 
         public void DodajUsluge(Usluga usluga)
         {

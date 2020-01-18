@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
+    [Serializable]
     [DataContract]
-    class KontoAdministratora : Konto
+    public class KontoAdministratora : Konto
     {
         public KontoAdministratora() : base() { }
 
-        public KontoAdministratora(string login, string haslo, string imie, string nazwisko, string email) : base(login, haslo, imie, nazwisko, email) { }
+        public KontoAdministratora(string login, string haslo, string imie, string nazwisko, string email) : 
+            base(login, haslo, imie, nazwisko, email) { }
 
         public override string ToString()
         {

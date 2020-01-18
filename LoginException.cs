@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
-    class LoginException:Exception
+    public class LoginException:Exception
     {
         public LoginException(string msg):base(msg)
-        { }
+        {
+        }
     }
 }

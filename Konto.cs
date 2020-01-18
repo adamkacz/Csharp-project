@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
+    [Serializable]
     [DataContract]
-    class Konto : IEquatable<Konto>
+    public class Konto : IEquatable<Konto>
     {
         string login;
         string haslo;
@@ -38,39 +39,32 @@ namespace Projekt
 
         public Konto(string login, string haslo, string imie, string nazwisko, string email)
         {
-            try { setLogin(login); }
-            catch (LoginException f)
-            {
-                Console.WriteLine(f.Message);
-            }
-
-            try { setHaslo(haslo); }
-            catch (HasloException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            Login = login;
+            Haslo = haslo;
             Email = email;
             Imie = imie;
             Nazwisko = nazwisko;
         }
 
-        public void setHaslo(string haslo)
+        /*public string SetHaslo(string haslo)
         {
-            if (haslo.Length < 6)
+            /*if (haslo.Length < 6)
             {
                 throw new HasloException("Za krótkie hasło.");
             }
-            else { Haslo = haslo; }
+            else { return haslo; }
+            return haslo;
         }
 
-        public void setLogin(string login)
+        public string SetLogin(string login)
         {
-            if ((login.Length < 3) && (login.Length > 19))
+            /*if ((login.Length < 3) && (login.Length > 19))
             {
                 throw new LoginException("Login nie może być krótszy niż 3 znaki ani dłuższy niż 19. ");
             }
-            else { Login = login; }
-        }
+            else { return login; }
+            return login;
+        }*/
 
         public override string ToString()
         {

@@ -27,10 +27,9 @@ namespace Projekt
             f.ListaRecenzji.Remove(rec);
         }
 
-        public static void EdytujRecenzje(Recenzja rec, Film f) //GUI
+        public static Recenzja EdytujRecenzje(Recenzja rec, Film f) //GUI
         {
-            Recenzja nowaRecenzja = rec.Clone() as Recenzja;
-
+            return rec.Clone() as Recenzja;
         }
     }
 }

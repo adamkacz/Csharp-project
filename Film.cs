@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
-    enum Gatunek { komedia, horror, romantyczny, dokumentalny, fantasy, thriller }
+    public enum Gatunek { komedia, horror, romantyczny, dokumentalny, fantasy, thriller }
     [DataContract]
-    class Film : IComparable<Film>
+    public class Film : IComparable<Film>
     {
         string tytul;
         Gatunek gatunek;
